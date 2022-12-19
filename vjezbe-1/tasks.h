@@ -61,3 +61,41 @@ void task_19() {
 
     cout << "Date valid" << endl;
 }
+
+void task_20() {
+    // Input first date
+    int day1, month1, year1;
+    std::cout << "Enter the day of the first date: ";
+    std::cin >> day1;
+    std::cout << "Enter the month of the first date: ";
+    std::cin >> month1;
+    std::cout << "Enter the year of the first date: ";
+    std::cin >> year1;
+
+    // Input second date
+    int day2, month2, year2;
+    std::cout << "Enter the day of the second date: ";
+    std::cin >> day2;
+    std::cout << "Enter the month of the second date: ";
+    std::cin >> month2;
+    std::cout << "Enter the year of the second date: ";
+    std::cin >> year2;
+
+    // Input third date
+    int day3, month3, year3;
+    std::cout << "Enter the day of the third date: ";
+    std::cin >> day3;
+    std::cout << "Enter the month of the third date: ";
+    std::cin >> month3;
+    std::cout << "Enter the year of the third date: ";
+    std::cin >> year3;
+
+    // Output oldest date
+    if (year1 < year2 && year1 < year3) {
+        std::cout << "The oldest date is: " << day1 << "." << month1 << "." << year1 << std::endl;
+    } else if (year2 < year1 && year2 < year3) {
+        std::cout << "The oldest date is: " << day2 << "." << month2 << "." << year2 << std::endl;
+    } else {
+        std::cout << "The oldest date is: " << day3 << "." << month3 << "." << year3 << std::endl;
+    }
+}

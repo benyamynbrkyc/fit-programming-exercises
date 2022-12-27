@@ -1,6 +1,6 @@
-#include "task10.h"
+#include "task19.h"
 
 int main() {
-    task10();
+    task19();
     return 0;
 }

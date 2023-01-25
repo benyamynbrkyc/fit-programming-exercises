@@ -13,5 +13,5 @@ int calculateFibonacci(int n) {
 }
 
 void task3() {
-    cout << calculateFibonacci(8) << endl;  // 21
+    cout << calculateFibonacci(5) << endl;  // 21
 }

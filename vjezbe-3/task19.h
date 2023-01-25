@@ -20,7 +20,9 @@ void createStudent(Student* student) {
     cin >> student->id;
 
     cout << "Enter fullName : ";
-    cin >> student->fullName;
+    char fullName[50];
+    cin >> fullName;
+    strcpy(student->fullName, fullName);
 
     Date date;
     cout << "Enter date of birth" << endl;
@@ -67,15 +69,21 @@ bool dateOfBirthValid(Date* date) {
 }
 
 void checkInvalidStudentDates(Student* student) {
-    if (!dateOfBirthValid(&student->dateOfBirth)) {
+    bool (*dateOfBirthValidPtr)(Date * date);
+    dateOfBirthValidPtr = dateOfBirthValid;
+
+    if (!dateOfBirthValidPtr(&student->dateOfBirth)) {
         cout << "Student " << student->id << " (" << student->fullName << ") has an invalid birth date : " << student->dateOfBirth.d << "/" << student->dateOfBirth.m << "/" << student->dateOfBirth.y << endl;
     }
 }
 
 Student* findFirstWithInvalidDate(Student* students, int size) {
+    bool (*dateOfBirthValidPtr)(Date * date);
+    dateOfBirthValidPtr = dateOfBirthValid;
+
     for (int i = 0; i < size; i++) {
         checkInvalidStudentDates(&students[i]);
-        if (!dateOfBirthValid(&students[i].dateOfBirth)) {
+        if (!dateOfBirthValidPtr(&students[i].dateOfBirth)) {
             return &students[i];
         }
     }
@@ -84,21 +92,28 @@ Student* findFirstWithInvalidDate(Student* students, int size) {
 }
 
 void task19() {
-    Student students[5];
+    int size = 5;
+    Student students[size];
 
-    void*(createStudentPtr)(Student*);
-    void*(output*)
+    void (*createStudentPtr)(Student*);
+    createStudentPtr = createStudent;
 
-        for (int i = 0; i < 5; i++) {
+    void (*outputPtr)(Student * student);
+    outputPtr = output;
+
+    void (*checkInvalidStudentDatesPtr)(Student * student);
+    checkInvalidStudentDatesPtr = checkInvalidStudentDates;
+
+    for (int i = 0; i < size; i++) {
         cout << "Enter details for Student " << i + 1 << endl;
         createStudentPtr(&students[i]);
     }
 
-    for (int i = 0; i < 5; i++) {
-        output(&students[i]);
+    for (int i = 0; i < size; i++) {
+        outputPtr(&students[i]);
     }
 
-    for (int i = 0; i < 5; i++) {
-        checkInvalidStudentDates(&students[i]);
+    for (int i = 0; i < size; i++) {
+        checkInvalidStudentDatesPtr(&students[i]);
     }
 }
